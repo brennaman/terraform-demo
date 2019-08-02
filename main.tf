@@ -58,7 +58,7 @@ resource "azurerm_resource_group" "main_acr_rg" {
 }
 
 resource "azurerm_container_registry" "acr" {
-  name                     = "${var.prefix}-container-reg"
+  name                     = "${var.prefix}ContainerReg"
   resource_group_name      = "${azurerm_resource_group.main_acr_rg.name}"
   location                 = "${azurerm_resource_group.main_acr_rg.location}"
   sku                      = "Basic"
