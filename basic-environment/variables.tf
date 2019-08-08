@@ -4,6 +4,12 @@ variable "azure_client_id" {}
 variable "client_certificate_path" {}
 variable "client_certificate_password" {}
 
+variable "backend_resource_group_name" {}
+variable "backend_storage_account_name" {}
+variable "backend_container_name" {}
+variable "backend_key" {}
+
+
 variable "azure_environment" {
   default = "public"
 }
