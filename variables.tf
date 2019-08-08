@@ -5,6 +5,17 @@
 # Terraform code. If you create a variable with no default, the user will be
 # prompted to enter it (or define it via config file or command line flags.)
 
+variable "client_id" {}
+
+variable "client_secret" {}
+
+variable "ssh_pub_key" {}
+
+variable "azure_subscription_id" {
+  
+}
+
+
 variable "prefix" {
   description = "This prefix will be included in the name of some resources."
   default     = "mydemo"
