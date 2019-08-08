@@ -1,13 +1,3 @@
-variable "azure_subscription_id" {}
-
-variable "client_id" {}
-
-variable "client_certificate_path" {}
-
-variable "client_certificate_password" {}
-
-variable "azure_tenant_id" {}
-
 variable "azure_environment" {
   default = "public"
 }
