@@ -15,7 +15,7 @@ pipeline {
         }
         stage('init_and_plan') {
             steps {
-                sh "echo 'init_and_plan...'"
+                sh "echo 'init_and_plandsafsad...'"
             }
         }
         stage('Test') {
