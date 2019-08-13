@@ -6,7 +6,7 @@ def secrets = [
 
 def configuration = [$class: 'VaultConfiguration',
                          vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200',
-                         vaultCredentialId: 'vault-app-role10']
+                         vaultCredentialId: 'vault-app-role11']
 
 pipeline {
     agent any
