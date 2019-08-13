@@ -1,8 +1,8 @@
 
-
-def secrets = vaultSecrets([
-    'secrets/myapp/anothersecret': [var: 'SECRET_1', key: 'value']
-])
+def secrets = [
+        [$class: 'VaultSecret', path: 'secrets/myapp/anothersecret', secretValues: [
+            [$class: 'VaultSecretValue', envVar: 'SECRET_1', vaultKey: 'value']]]
+    ]
 
 pipeline {
     agent any
