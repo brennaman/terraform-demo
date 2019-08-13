@@ -1,6 +1,6 @@
 
 def secrets = [
-        [$class: 'VaultSecret', path: 'secrets/myapp/anothersecret', engineVersion: 2,  secretValues: [
+        [$class: 'VaultSecret', path: 'myapp/anothersecret', engineVersion: 2,  secretValues: [
             [$class: 'VaultSecretValue', envVar: 'SECRET_1', vaultKey: 'value']]]
     ]
 
