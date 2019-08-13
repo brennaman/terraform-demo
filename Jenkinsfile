@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('test_vault_access') {
             steps {
-                wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
+                wrap([$class: 'VaultBuildWrapper', vaultSecrets: secrets]) {
                     sh 'echo $SECRET_1'
                 }
             }
