@@ -17,7 +17,7 @@ pipeline {
                 echo $azure_subscription_id
                 }
             }
-        }
+        
         stage('test') {
             steps {
                 echo 'Testing..'
