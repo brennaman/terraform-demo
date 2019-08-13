@@ -14,9 +14,7 @@ pipeline {
     stages {
         stage('test_vault_access') {
             steps {
-                /*wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
-                    sh 'echo $SUBSCRIPTION_ID'*/
-                    echo env.azure-subscription-id
+                echo $azure_subscription_id
                 }
             }
         }
