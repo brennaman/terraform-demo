@@ -1,16 +1,19 @@
+def secrets = [
+        [$class: 'VaultSecret', path: 'secret/myapp', secretValues: [
+            [$class: 'VaultSecretValue', envVar: 'SECRET_1', vaultKey: 'anothersecret'],
+            [$class: 'VaultSecretValue', envVar: 'API_KEY', vaultKey: 'apikey']]]
+    ]
+
 pipeline {
     agent any
 
     stages {
         stage('install_deps') {
             steps {
-                sh "ls -a"
-                /* sh "sudo apt install wget zip python-pip -y"
-                sh "cd /tmp"
-                sh "curl -o terraform.zip https://releases.hashicorp.com/terraform/'$terraform_version'/terraform_'$terraform_version'_linux_amd64.zip"
-                sh "unzip terraform.zip"
-                sh "sudo mv terraform /usr/bin"
-                sh "rm -rf terraform.zip"*/
+                wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
+                    sh 'echo $SECRET_1'
+                    sh 'echo $tesAPI_KEYting_again'
+                }
             }
         }
         stage('init_and_plan') {
