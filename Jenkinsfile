@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('test_vault_access') {
             steps {
-                echo $azure_subscription_id
+                echo env.azure_subscription_id
                 }
             }
         
