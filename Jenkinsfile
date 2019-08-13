@@ -4,9 +4,9 @@ def secrets = [
             [$class: 'VaultSecretValue', envVar: 'SUBSCRIPTION_ID', vaultKey: 'subscriptionid']]]
     ]
 
-def configuration = [$class: 'VaultConfiguration',
+/*def configuration = [$class: 'VaultConfiguration',
                          vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200',
-                         vaultCredentialId: 'vault-app-role']
+                         vaultCredentialId: 'vault-app-role'] */
 
 pipeline {
     agent any
@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('test_vault_access') {
             steps {
-                wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
+                wrap([$class: 'VaultBuildWrapper', vaultSecrets: secrets]) {
                     sh 'echo $SUBSCRIPTION_ID'
                 }
             }
