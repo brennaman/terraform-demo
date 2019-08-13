@@ -1,12 +1,9 @@
 
 def secrets = [
-        [$class: 'VaultSecret', path: 'secrets/myapp/anothersecret', engineVersion: 2,  secretValues: [
-            [$class: 'VaultSecretValue', envVar: 'SECRET_1', vaultKey: 'value']]]
+        [$class: 'VaultSecret', path: 'secrets/myapp', engineVersion: 2,  secretValues: [
+            [$class: 'VaultSecretValue', envVar: 'SECRET_1', vaultKey: 'anothersecret']]]
     ]
 
- def configuration = [$class: 'VaultConfiguration',
-                         vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200',
-                         vaultCredentialId: 'pbjenk01']
 
 pipeline {
     agent any
