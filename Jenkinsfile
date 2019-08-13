@@ -8,27 +8,17 @@ pipeline {
     agent any
 
     stages {
-        stage('install_deps') {
+        stage('test_vault_access') {
             steps {
-                wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
+                wrap([$class: 'VaultBuildWrapper', vaultSecrets: secrets]) {
                     sh 'echo $SECRET_1'
                     sh 'echo $tesAPI_KEYting_again'
                 }
             }
         }
-        stage('init_and_plan') {
-            steps {
-                sh "echo 'init_and_plandsafsad...'"
-            }
-        }
-        stage('Test') {
+        stage('test') {
             steps {
                 echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
             }
         }
     }
