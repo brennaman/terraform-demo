@@ -17,22 +17,27 @@ pipeline {
     }*/
 
     stages {
-        stage('test_vault_access') {
+        stage('Docker login') {
             steps {
-                //echo "${SECRET}"
-                /*wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
-                    sh 'echo $SUBSCRIPTION_ID'}*/
-
-                    script{
-                        def tfHome = tool name: "Terraform 0.12.6"
-                        env.PATH = "${tfHome}:${env.PATH}"
-                    }
-                    sh "/var/jenkins_home/tools/org.jenkinsci.plugins.terraform.TerraformInstallation/Terraform_0.12.6/terraform"
-                    sh "ls -a"
-                    //sh "terraform --version"
-                }
-                
+                sh "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD}"
             }
+        }
+        // stage('test_vault_access') {
+        //     steps {
+        //         //echo "${SECRET}"
+        //         /*wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
+        //             sh 'echo $SUBSCRIPTION_ID'}*/
+
+        //             script{
+        //                 def tfHome = tool name: "Terraform 0.12.6"
+        //                 env.PATH = "${tfHome}:${env.PATH}"
+        //             }
+        //             sh "/var/jenkins_home/tools/org.jenkinsci.plugins.terraform.TerraformInstallation/Terraform_0.12.6/terraform"
+        //             sh "ls -a"
+        //             //sh "terraform --version"
+        //         }
+                
+        //     }
         
         stage('test') {
             steps {
