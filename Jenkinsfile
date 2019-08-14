@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('test_vault_access') {
             steps {
-                echo ${SECRET}
+                echo "${SECRET}"
                 /*wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
                     sh 'echo $SUBSCRIPTION_ID'}*/
                 }
