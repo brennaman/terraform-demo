@@ -14,7 +14,7 @@ pipeline {
     registry = "brennaman3/docker-test"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    TERRAFORM_CMD = "docker run -i -t hashicorp/terraform:light -w /app -v `pwd`:/app"
+    TERRAFORM_CMD = 'docker run -i -t hashicorp/terraform:light -w /app -v "`pwd`":/app'
   }
   agent any
   stages {
