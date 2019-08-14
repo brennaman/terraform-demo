@@ -27,7 +27,7 @@ pipeline {
                         def tfHome = tool name: "Terraform 0.12.6"
                         env.PATH = "${tfHome}:${env.PATH}"
                     }
-                    sh "cd /var/jenkins_home/tools/org.jenkinsci.plugins.terraform.TerraformInstallation/Terraform_0.12.6"
+                    sh "/var/jenkins_home/tools/org.jenkinsci.plugins.terraform.TerraformInstallation/Terraform_0.12.6/terraform"
                     sh "ls -a"
                     //sh "terraform --version"
                 }
