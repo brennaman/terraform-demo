@@ -13,7 +13,7 @@ pipeline {
     agent any
 
     environment {
-        SECRET = vault path: 'secrets/azuretest1', key: 'value'
+        SECRET = vault path: 'secrets', key: 'azuretest1'
     }
 
     stages {
