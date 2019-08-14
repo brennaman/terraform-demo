@@ -1,7 +1,7 @@
 
 def secrets = [
-        [$class: 'VaultSecret', path: 'secrets', secretValues: [
-            [$class: 'VaultSecretValue', envVar: 'SUBSCRIPTION_ID', vaultKey: 'azuretest1']]]
+        [$class: 'VaultSecret', path: 'secrets/azuretest1', secretValues: [
+            [$class: 'VaultSecretValue', envVar: 'SUBSCRIPTION_ID', vaultKey: 'value']]]
     ]
 
 def configuration = [$class: 'VaultConfiguration',
