@@ -23,11 +23,11 @@ pipeline {
                 /*wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
                     sh 'echo $SUBSCRIPTION_ID'}*/
 
-                    script {
+                    
                     def tfHome = tool name: "Terraform 0.12.6"
-                    env.PATH = "${tfHome}:${env.PATH}"
-                    }
-                    sh "echo 'terr'"
+                    dev tf = "${tfHome}/terraform"
+                    
+                    sh "${tf} version"
                 }
                 
             }
