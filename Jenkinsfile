@@ -21,15 +21,20 @@ pipeline {
     //     -e TF_VAR_AZURE_CLIENT_SECRET_ID = ${env.AZURE_CLIENT_SECRET_ID}
     //     -w /app -v $(pwd):/app'
 
-    TERRAFORM_CMD = 'docker run hashicorp/terraform:light \
-        -e "TF_VAR_AZURE_SUBSCRIPTION_ID=$(AZURE_SUBSCRIPTION_ID)" \
-        -w /app -v $(pwd):/app'
+    TERRAFORM_CMD = "docker run hashicorp/terraform:light \
+        -e 'TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}' \
+        -w /app -v $(pwd):/app"
   }
   agent any
   stages {
     stage("Env") {
       steps{
         echo env.AZURE_SUBSCRIPTION_ID
+      }
+    }
+    stage("SH Env") {
+      steps{
+        sh "echo ${env.AZURE_SUBSCRIPTION_ID}"
       }
     }
     stage("Docker Pull") {
