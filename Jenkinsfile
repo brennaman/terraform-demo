@@ -25,12 +25,13 @@ pipeline {
     }
     stage("Terraform Init") {
       steps{
-        sh "${TERRAFORM_CMD} init -backend=true -input=false" 
+        sh "${TERRAFORM_CMD} init -backend=true -input=false basic-environment" 
       }
     }
     stage("ls") {
       steps{
-        sh "ls -a" 
+        sh "cd basic-environment" 
+        sh "ls -a"
       }
     }
     /*
