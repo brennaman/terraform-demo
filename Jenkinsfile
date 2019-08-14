@@ -10,14 +10,20 @@ def configuration = [$class: 'VaultConfiguration',
 */
 
 pipeline {
-    agent any
-    stages {
-        stage('Test') {
-            steps {
-                sh 'docker --version'
-            }
+  environment {
+    registry = "brennaman3/docker-test"
+    registryCredential = 'dockerhub'
+  }
+  agent any
+  stages {
+    stage('Building image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
+  }
 }
 /*
 pipeline {
