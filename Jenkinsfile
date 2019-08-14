@@ -25,9 +25,9 @@ pipeline {
 
                     script{
                         def tfHome = tool name: "Terraform 0.12.6"
-                        env.PATH = "${tfHome}:${env.PATH}"
+                        env.PATH = "${tfHome}"
                     }
-                    sh "echo ${tfHome}"
+                    sh "terraform version"
                 }
                 
             }
