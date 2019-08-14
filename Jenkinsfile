@@ -17,6 +17,12 @@ pipeline {
   }
   agent any
   stages {
+    stage('pwd') {
+      steps{
+        sh 'pwd'
+      }
+    }
+    /*
     stage('Building image') {
       steps{
         script {
@@ -38,6 +44,7 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
+    */
   }
 }
 /*
