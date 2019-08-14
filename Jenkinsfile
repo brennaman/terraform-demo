@@ -7,12 +7,14 @@
 def configuration = [$class: 'VaultConfiguration',
                          vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200',
                          vaultCredentialId: 'vault-app-role20']*/
-environment {
-        SECRET = vault path: 'secrets/azuretest1', key: 'value'
-    }
+
 
 pipeline {
     agent any
+
+    environment {
+        SECRET = vault path: 'secrets/azuretest1', key: 'value'
+    }
 
     stages {
         stage('test_vault_access') {
