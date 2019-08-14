@@ -10,9 +10,7 @@ def configuration = [$class: 'VaultConfiguration',
 */
 
 pipeline {
-    agent {
-        docker { image 'node:7-alpine' }
-    }
+    agent any
     stages {
         stage('Test') {
             steps {
