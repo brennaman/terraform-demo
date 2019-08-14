@@ -22,7 +22,7 @@ pipeline {
     //     -w /app -v $(pwd):/app'
 
     TERRAFORM_CMD = 'docker run hashicorp/terraform:light \
-        -e "TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}"
+        -e "TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}" \
         -w /app -v $(pwd):/app'
   }
   agent any
