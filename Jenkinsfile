@@ -12,16 +12,16 @@ def configuration = [$class: 'VaultConfiguration',
 pipeline {
     agent any
 
-    /*environment {
-        SECRET = vault path: 'secrets/azuretest1', key: 'value', vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200', credentialsId: 'vault-app-role20'
-    }*/
+    environment {
+        SECRET = vault path: 'secret/hello', key: 'value', vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200', credentialsId: 'vault-app-role20'
+    }
 
     stages {
         stage('test_vault_access') {
             steps {
-                //echo "${SECRET}"
-                wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
-                    sh 'echo $SUBSCRIPTION_ID'}
+                echo "${SECRET}"
+                /*wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
+                    sh 'echo $SUBSCRIPTION_ID'}*/
                 }
             }
         
