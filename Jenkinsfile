@@ -13,7 +13,7 @@ pipeline {
     agent any
 
     environment {
-        SECRET = vault path: 'secrets', key: 'azuretest1'
+        SECRET = vault path: 'secrets/azuretest1', key: 'value', vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200', credentialsId: 'vault-app-role20'
     }
 
     stages {
