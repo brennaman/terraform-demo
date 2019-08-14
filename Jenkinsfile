@@ -19,8 +19,8 @@ pipeline {
             steps {
                 echo ${SECRET}
                 /*wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
-                    sh 'echo $SUBSCRIPTION_ID'}
-                }*/
+                    sh 'echo $SUBSCRIPTION_ID'}*/
+                }
             }
         
         stage('test') {
