@@ -14,12 +14,23 @@ pipeline {
     registry = "brennaman3/docker-test"
     registryCredential = 'dockerhub'
     dockerImage = ''
+    TERRAFORM_CMD = "docker run -i -t hashicorp/terraform:light"
   }
   agent any
   stages {
-    stage('pwd') {
+    stage("Docker Pull") {
       steps{
-        sh 'pwd'
+        sh "docker pull hashicorp/terraform:light"
+      }
+    }
+    stage("Terraform Init") {
+      steps{
+        sh "${TERRAFORM_CMD} init -backend=true -input=false" 
+      }
+    }
+    stage("ls") {
+      steps{
+        sh "ls -a" 
       }
     }
     /*
@@ -39,6 +50,7 @@ pipeline {
         }
       }
     }
+    
     stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
