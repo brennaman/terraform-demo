@@ -27,7 +27,7 @@ pipeline {
                         def tfHome = tool name: "Terraform 0.12.6"
                         env.PATH = "${tfHome}:${env.PATH}"
                     }
-                    sh "ls -a"
+                    sh "echo ${env.PATH}"
                 }
                 
             }
