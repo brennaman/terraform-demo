@@ -27,6 +27,11 @@ pipeline {
   }
   agent any
   stages {
+    stage("Env") {
+      steps{
+        echo env.AZURE_SUBSCRIPTION_ID
+      }
+    }
     stage("Docker Pull") {
       steps{
         sh "docker pull hashicorp/terraform:light"
