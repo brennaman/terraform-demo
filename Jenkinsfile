@@ -14,7 +14,12 @@ pipeline {
     registry = "brennaman3/docker-test"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    TERRAFORM_CMD = 'docker run hashicorp/terraform:light -w /app -v $(pwd)/basic-environment:/app'
+    TERRAFORM_CMD = 'docker run hashicorp/terraform:light \
+        -e TF_VAR_AZURE_SUBSCRIPTION_ID = ${env.AZURE_SUBSCRIPTION_ID} \
+        -e TF_VAR_AZURE_TENANT_ID = ${env.AZURE_TENANT_ID} \
+        -e TF_VAR_AZURE_CLIENT_ID = ${env.AZURE_CLIENT_ID} \
+        -e TF_VAR_AZURE_CLIENT_SECRET_ID = ${env.AZURE_CLIENT_SECRET_ID} \
+        -w /app -v $(pwd):/app'
   }
   agent any
   stages {
