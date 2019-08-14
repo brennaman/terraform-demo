@@ -24,7 +24,7 @@ pipeline {
                     sh 'echo $SUBSCRIPTION_ID'}*/
 
                     script {
-                    def tfHome = tool name: "Terraform"
+                    def tfHome = tool name: "Terraform 0.12.6"
                     env.PATH = "${tfHome}:${env.PATH}"
                     }
                     sh "terraform — version"
