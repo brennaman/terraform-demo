@@ -14,7 +14,7 @@ pipeline {
     registry = "brennaman3/docker-test"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    TERRAFORM_CMD = 'docker run hashicorp/terraform:light -w /app -v $(pwd):/app'
+    TERRAFORM_CMD = 'docker run hashicorp/terraform:light -w /app -v $(pwd)/basic-environment:/app'
   }
   agent any
   stages {
@@ -25,12 +25,11 @@ pipeline {
     }
     stage("Terraform Init") {
       steps{
-        sh "${TERRAFORM_CMD} init -backend=true -input=false basic-environment" 
+        sh "${TERRAFORM_CMD} init -backend=true -input=false" 
       }
     }
     stage("ls") {
       steps{
-        sh "cd basic-environment" 
         sh "ls -a"
       }
     }
