@@ -25,7 +25,7 @@ pipeline {
 
                     
                     def tfHome = tool name: "Terraform 0.12.6"
-                    dev tf = "${tfHome}/terraform"
+                    def tf = "${tfHome}/terraform"
                     
                     sh "${tf} version"
                 }
