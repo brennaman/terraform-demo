@@ -20,9 +20,14 @@ pipeline {
         stage('test_vault_access') {
             steps {
                 //echo "${SECRET}"
-                wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
-                    sh 'echo $SUBSCRIPTION_ID'}
+                /*wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
+                    sh 'echo $SUBSCRIPTION_ID'}*/
                 }
+                script {
+                    def tfHome = tool name: ‘Terraform’
+                    env.PATH = “${tfHome}:${env.PATH}”
+                }
+                sh ‘terraform — version’
             }
         
         stage('test') {
