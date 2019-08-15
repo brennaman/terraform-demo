@@ -21,7 +21,7 @@ pipeline {
     //     -e TF_VAR_AZURE_CLIENT_SECRET_ID = ${env.AZURE_CLIENT_SECRET_ID}
     //     -w /app -v $(pwd):/app'
 
-    TERRAFORM_CMD = 'docker run -it -w /data -v "$(pwd)":/data'
+    TERRAFORM_CMD = 'docker run -w /data -v "$(pwd)":/data'
     //TERRAFORM_CMD = 'docker run hashicorp/terraform:light'
   }
   agent any
