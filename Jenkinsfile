@@ -21,8 +21,7 @@ pipeline {
     //     -e TF_VAR_AZURE_CLIENT_SECRET_ID = ${env.AZURE_CLIENT_SECRET_ID}
     //     -w /app -v $(pwd):/app'
 
-    TERRAFORM_CMD = 'docker run hashicorp/terraform:light \
-        -w /app -v $(pwd):/app'
+    TERRAFORM_CMD = "docker run hashicorp/terraform:light -w /app -v $(pwd):/app"
   }
   agent any
   stages {
@@ -43,7 +42,17 @@ pipeline {
     }
     stage("Terraform Init") {
       steps{
-        sh "${TERRAFORM_CMD} -e ''TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}'' -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" init -backend=true -input=false"
+        sh "${TERRAFORM_CMD} -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" init -backend=true -input=false"
+      }
+    }
+    stage("Terraform Plan") {
+      steps{
+        sh "${TERRAFORM_CMD} -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" plan"
+      }
+    }
+    stage("Terraform Apply") {
+      steps{
+        sh "${TERRAFORM_CMD} -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" apply -auto-approve"
       }
     }
     stage("ls") {
