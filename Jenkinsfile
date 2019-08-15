@@ -1,14 +1,3 @@
-
-/*def secrets = [
-        [$class: 'VaultSecret', path: 'secret/data/hello', secretValues: [
-            [$class: 'VaultSecretValue', envVar: 'SUBSCRIPTION_ID', vaultKey: 'value']]]
-    ]
-
-def configuration = [$class: 'VaultConfiguration',
-                         vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200',
-                         vaultCredentialId: 'vault-token-id']
-*/
-
 pipeline {
   environment {
     registry = "brennaman3/terraform-rollout-plan"
