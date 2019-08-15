@@ -2,7 +2,7 @@
 FROM hashicorp/terraform:light
 
 # The app folder will contain all our files
-WORKDIR /data
+WORKDIR /app
 
 # Put all your configration files in the same folder as the Dockerfile
-COPY . /data
+COPY . /app
