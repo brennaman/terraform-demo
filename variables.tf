@@ -16,6 +16,8 @@ variable "AZURE_AKS_AAD_SERVER_APP_ID" {}
 
 variable "AZURE_AKS_AAD_SERVER_SECRET" {}
 
+variable "PUBLIC_SSH_KEY" {}
+
 variable "kubernetes_version" {
   default = "1.13.9"
 }

@@ -10,7 +10,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     admin_username = "${var.AZURE_AKS_ADMIN_USER}"
 
     ssh_key {
-      key_data = "${file(var.PUBLIC_SSH_KEY_PATH)}"
+      key_data = "${var.PUBLIC_SSH_KEY}"
     }
   }
 
