@@ -3,7 +3,7 @@ pipeline {
     registry = "brennaman3/terraform-rollout-plan"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    TERRAFORM_CMD = 'docker run -w /data -v "$(pwd)":/data'
+    TERRAFORM_CMD = 'docker run -w /app'
   }
   agent any
   stages {
