@@ -11,7 +11,7 @@ def configuration = [$class: 'VaultConfiguration',
 
 pipeline {
   environment {
-    registry = "brennaman3/docker-test"
+    registry = "brennaman3/terraform-rollout-plan"
     registryCredential = 'dockerhub'
     dockerImage = ''
     // TERRAFORM_CMD = 'docker run hashicorp/terraform:light
@@ -52,12 +52,22 @@ pipeline {
     }
     stage("Docker Build") {
       steps{
-        sh "docker build -t brennaman3/terraform-rollout-plan:${BUILD_NUMBER} ."
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
       }
     }
     stage("Docker Push") {
       steps{
-        sh "docker push brennaman3/terraform-rollout-plan:${BUILD_NUMBER}"
+        script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
     stage("Terraform Apply") {
