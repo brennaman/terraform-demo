@@ -73,7 +73,7 @@ pipeline {
     }
     stage("Terraform Apply") {
       steps{
-        sh "${TERRAFORM_CMD} -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" apply -auto-approve"
+        sh "docker run $registry:$BUILD_NUMBER -w /app -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" apply -auto-approve"
       }
     }
     stage("ls") {
