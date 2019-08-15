@@ -9,8 +9,7 @@ pipeline {
   stages {
     stage("Docker Pull") {
       steps{
-        sh "echo $DOCKER_TRIGGER_REPO_NAME"
-        sh "ls -a"
+        sh "docker pull $DOCKER_TRIGGER_REPO_NAME"
       }
     }
   }
