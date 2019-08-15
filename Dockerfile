@@ -9,4 +9,4 @@ COPY . /app
 
 RUN ["terraform", "init"]
 
-CMD plan
+CMD ["plan"]
