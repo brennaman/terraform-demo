@@ -8,4 +8,4 @@ WORKDIR /app
 COPY . /app
 
 # Initalize terraform with local settings and data
-RUN ["terraform", "init"]
+RUN ["init"]
