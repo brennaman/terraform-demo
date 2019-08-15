@@ -6,3 +6,6 @@ WORKDIR /app
 
 # Put all your configration files in the same folder as the Dockerfile
 COPY . /app
+
+RUN echo $(ls -al /app)
+RUN echo $(ls -al /data)
