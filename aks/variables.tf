@@ -4,8 +4,6 @@ variable "AZURE_CLIENT_ID" {}
 
 variable "AZURE_CLIENT_SECRET" {}
 
-variable "PUBLIC_SSH_KEY_PATH" {}
-
 variable "PUBLIC_SSH_KEY" {}
 
 variable "AZURE_AKS_ADMIN_USER" {}
