@@ -49,7 +49,7 @@ pipeline {
     }
     stage("Terraform Init") {
       steps{
-        sh "docker run -it -w /data -v $(pwd):/data -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" hashicorp/terraform:light init"
+        sh "docker run -it -w /data -v pwd:/data -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" hashicorp/terraform:light init"
       }
     }
     // stage("Terraform Plan") {
