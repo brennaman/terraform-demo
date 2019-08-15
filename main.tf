@@ -14,7 +14,6 @@ module "k8s_cluster" {
   source                        = "./aks"
   AZURE_CLIENT_ID               = var.AZURE_CLIENT_ID
   AZURE_CLIENT_SECRET           = var.AZURE_CLIENT_SECRET
-  PUBLIC_SSH_KEY_PATH           = var.PUBLIC_SSH_KEY_PATH
   PUBLIC_SSH_KEY                = var.PUBLIC_SSH_KEY
   AZURE_AKS_ADMIN_USER          = var.AZURE_AKS_ADMIN_USER
   environment                   = var.environment
