@@ -1,5 +1,5 @@
 # Use the light version of the image that contains just the latest binary
-FROM hashicorp/terraform:light
+FROM hashicorp/terraform:full
 
 # The app folder will contain all our files
 WORKDIR /app
