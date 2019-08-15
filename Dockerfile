@@ -9,6 +9,3 @@ COPY . /app
 
 # Initalize terraform with local settings and data
 RUN ["terraform", "init"]
-
-# Plan and execute the configurations
-CMD ["apply"]
