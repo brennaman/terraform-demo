@@ -3,34 +3,10 @@ pipeline {
     registry = "brennaman3/terraform-rollout-plan"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    // TERRAFORM_CMD = 'docker run hashicorp/terraform:light
-    //     -e TF_VAR_AZURE_SUBSCRIPTION_ID = ${env.AZURE_SUBSCRIPTION_ID}
-    //     -e TF_VAR_AZURE_TENANT_ID = ${env.AZURE_TENANT_ID}
-    //     -e TF_VAR_AZURE_CLIENT_ID = ${env.AZURE_CLIENT_ID}
-    //     -e TF_VAR_AZURE_CLIENT_SECRET_ID = ${env.AZURE_CLIENT_SECRET_ID}
-    //     -w /app -v $(pwd):/app'
-
     TERRAFORM_CMD = 'docker run -w /data -v "$(pwd)":/data'
-    //TERRAFORM_CMD = 'docker run hashicorp/terraform:light'
   }
   agent any
   stages {
-    // stage("Env") {
-    //   steps{
-    //     echo env.AZURE_SUBSCRIPTION_ID
-    //   }
-    // }
-    // stage("SH Env") {
-    //   steps{
-    //     sh "echo ${env.AZURE_SUBSCRIPTION_ID}"
-    //   }
-    // }
-    stage("ls before") {
-      steps{
-        sh "pwd"
-        sh "ls -a"
-      }
-    }
     stage("Docker Pull") {
       steps{
         sh "docker pull hashicorp/terraform:light"
@@ -62,91 +38,11 @@ pipeline {
         }
       }
     }
-    stage('Remove Unused docker image') {
+    stage('Cleanup') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
-      }
-    }
-    stage("ls after") {
-      steps{
-        sh "pwd"
-        sh "ls -a"
-      }
-    }
-    stage('Remove Files') {
-      steps{
         sh "rm -rf *"
       }
     }
-    //
-    // stage("Terraform Init For Apply") {
-    //   steps{
-    //     sh "docker run $registry:$BUILD_NUMBER -w /app -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" init"
-    //   }
-    // }
-    
-    /*
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-        }
-      }
-    }
-    stage('Deploy Image') {
-      steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-    
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
-      }
-    }
-    */
   }
 }
-/*
-pipeline {
-    agent any
-
-    environment {
-        SECRET = vault path: 'secret/data/hello', key: 'value', vaultUrl: 'http://pbjenk01.eastus.azurecontainer.io:8200', credentialsId: 'vault-token-id'
-    }
-
-    stages {
-        stage('Docker login') {
-            steps {
-                sh "docker login -u ${env.DOCKER_USERNAME} -p ${env.DOCKER_PASSWORD}"
-            }
-        }
-        stage('test_vault_access') {
-            steps {
-                //echo "${SECRET}"
-                wrap([$class: 'VaultBuildWrapper', configuration: configuration, vaultSecrets: secrets]) {
-                    sh 'echo $SUBSCRIPTION_ID'}
-
-                    script{
-                        def tfHome = tool name: "Terraform 0.12.6"
-                        env.PATH = "${tfHome}:${env.PATH}"
-                    }
-                    sh "/var/jenkins_home/tools/org.jenkinsci.plugins.terraform.TerraformInstallation/Terraform_0.12.6/terraform"
-                    sh "ls -a"
-                    //sh "terraform --version"
-                }
-                
-            }
-        
-        stage('test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-    }
-}
-*/
