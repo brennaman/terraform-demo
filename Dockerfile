@@ -9,4 +9,4 @@ COPY . /app
 
 RUN ["terraform", "init"]
 
-CMD [ "plan -out=out.tfstate" ]
+CMD [ "plan" "-out=out.tfstate" ]
