@@ -35,6 +35,12 @@ pipeline {
     //     sh "echo ${env.AZURE_SUBSCRIPTION_ID}"
     //   }
     // }
+    stage("ls before") {
+      steps{
+        sh "pwd"
+        sh "ls -a"
+      }
+    }
     stage("Docker Pull") {
       steps{
         sh "docker pull hashicorp/terraform:light"
@@ -77,8 +83,9 @@ pipeline {
     //     sh "docker run $registry:$BUILD_NUMBER -w /app -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET_ID=${env.AZURE_CLIENT_SECRET_ID}\" init"
     //   }
     // }
-    stage("ls") {
+    stage("ls after") {
       steps{
+        sh "pwd"
         sh "ls -a"
       }
     }
