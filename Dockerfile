@@ -11,4 +11,4 @@ COPY . /app
 RUN ["terraform", "init"]
 
 # Plan and execute the configurations
-CMD [ "apply"]
+CMD ["apply"]
