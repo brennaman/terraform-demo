@@ -8,5 +8,3 @@ WORKDIR /app
 COPY . /app
 
 RUN ["terraform", "init"]
-
-CMD ["plan"]
