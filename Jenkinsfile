@@ -22,7 +22,7 @@ pipeline {
     //     -w /app -v $(pwd):/app'
 
     //TERRAFORM_CMD = 'docker run hashicorp/terraform:light -w /data -v "$(pwd)":/data'
-    TERRAFORM_CMD = 'docker run hashicorp/terraform:light'
+    //TERRAFORM_CMD = 'docker run hashicorp/terraform:light'
   }
   agent any
   stages {

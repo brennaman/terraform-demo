@@ -1,6 +1,6 @@
 variable "AZURE_SUBSCRIPTION_ID" {}
 variable "AZURE_TENANT_ID" {}
-variable "AZURE_CLIENT_IDnt_id" {}
+variable "AZURE_CLIENT_ID" {}
 variable "AZURE_CLIENT_SECRET_ID" {}
 
 variable "azure_environment" {
