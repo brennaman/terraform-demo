@@ -1,7 +1,5 @@
 variable "AZURE_TENANT_ID" {}
 
-variable "AZURE_SUBSCRIPTION_ID" {}
-
 variable "AZURE_CLIENT_ID" {}
 
 variable "AZURE_CLIENT_SECRET" {}
@@ -17,6 +15,10 @@ variable "AZURE_AKS_AAD_SERVER_APP_ID" {}
 variable "AZURE_AKS_AAD_SERVER_SECRET" {}
 
 variable "kubernetes_version" {}
+
+variable "vnet_subnet_id" {}
+
+variable "resource_group" {}
 
 variable "prefix" {
     default = "mbdemo"
