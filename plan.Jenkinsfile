@@ -53,7 +53,7 @@ pipeline {
           '''
           */
           sh '''
-          docker run -w /data -v \$(pwd):data \
+          docker run -w /data -v \$(pwd):/data \
           hashicorp/terraform:light init 
           '''
       }
