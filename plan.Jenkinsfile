@@ -108,12 +108,14 @@ pipeline {
         }
       }
     }
+    */
     stage('Cleanup') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "hashicorp/terraform:light"
         sh "rm -rf *"
       }
     }
-    */
+    
   }
 }
