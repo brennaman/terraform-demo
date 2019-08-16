@@ -29,9 +29,9 @@ pipeline {
     }
     stage("Terraform Init") {
       steps{
-        sh "pwd"
+        sh "export wdirecotry=pwd"
         sh '''
-        docker run -w /data -v \\"$pwd\\":/data \
+        docker run -w /data -v $wdirecotry:/data \
           -e TF_VAR_PUBLIC_SSH_KEY \
           -e TF_VAR_AZURE_AKS_ADMIN_USER \
           -e TF_VAR_AZURE_AKS_AAD_SERVER_SECRET \
