@@ -9,7 +9,7 @@ resource "azurerm_resource_group" "k8s" {
   name     = "${var.prefix}-aks-${var.region}-${var.environment}-${var.location_key}-group"
   location = "${var.location}"
 }
-/*
+
 module "k8s_cluster" {
   source                        = "./aks"
   AZURE_CLIENT_ID               = var.AZURE_CLIENT_ID
@@ -30,4 +30,3 @@ module "k8s_cluster" {
   AZURE_AKS_AAD_SERVER_SECRET   = var.AZURE_AKS_AAD_SERVER_SECRET
   AZURE_TENANT_ID               = var.AZURE_TENANT_ID
 }
-*/
