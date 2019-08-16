@@ -54,6 +54,7 @@ pipeline {
           */
           sh '''
           docker run -w /data -v \$(pwd):/data \
+          -e TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY \
           hashicorp/terraform:light init 
           '''
       }
