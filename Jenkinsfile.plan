@@ -4,7 +4,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     dockerLatest = ''
-    TERRAFORM_CMD = 'docker run -w /data -v \"$(pwd)\":/data'
+    TERRAFORM_CMD = 'docker run -w /data -v $pwd:/data'
     TF_VAR_PUBLIC_SSH_KEY = credentials('PUBLIC_SSH_KEY')
     TF_VAR_AZURE_CLIENT_ID = credentials('AZURE_CLIENT_ID')
     TF_VAR_AZURE_CLIENT_SECRET = credentials('AZURE_CLIENT_SECRET')
@@ -51,7 +51,7 @@ pipeline {
     stage("Terraform Plan") {
       steps{
         sh '''
-        ${TERRAFORM_CMD}  
+        ${TERRAFORM_CMD} 
           -e TF_VAR_PUBLIC_SSH_KEY 
           -e TF_VAR_AZURE_AKS_ADMIN_USER 
           -e TF_VAR_AZURE_AKS_AAD_SERVER_SECRET 
