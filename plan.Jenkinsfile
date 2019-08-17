@@ -13,11 +13,7 @@ pipeline {
     TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID = credentials('AZURE_AKS_AAD_CLIENT_APP_ID')
     TF_VAR_AZURE_SUBSCRIPTION_ID = credentials('AZURE_SUBSCRIPTION_ID')
     TF_VAR_AZURE_TENANT_ID = credentials('AZURE_TENANT_ID')
-    TERRAFORM_BACKEND_RESOURCE_GRP_NAME = credentials('TERRAFORM_BACKEND_RESOURCE_GRP_NAME')
-    TERRAFORM_BACKEND_STORAGE_ACCT_NAME = credentials('TERRAFORM_BACKEND_STORAGE_ACCT_NAME')
-    TERRAFORM_BACKEND_CONTAINER_NAME = credentials('TERRAFORM_BACKEND_CONTAINER_NAME')
-
-    
+      
     
     
   }
@@ -51,7 +47,7 @@ pipeline {
         //   -backend-config="container_name=$TERRAFORM_BACKEND_CONTAINER_NAME" \
         //   -backend-config="key=$TERRAFORM_BACKEND_KEY"
         //   '''
-        withCredentials([file(credentialsId: 'TERRAFORM_BACKEND_KEY', variable: TERRAFORM_BACKEND_KEY)]) {
+        withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: AZURERM_BACKEND_CONFIG)]) {
           sh "echo $AZURERM_BACKEND_CONFIG"
           sh '''
             docker run -w /data -v \$(pwd):/data \
