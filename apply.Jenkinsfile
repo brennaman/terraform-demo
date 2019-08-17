@@ -24,7 +24,7 @@ pipeline {
     stage("Terraform Init") {
       steps{
         sh '''
-          docker run \
+          docker run -w /data \
           -e "ARM_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
           -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
           -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
@@ -40,7 +40,7 @@ pipeline {
     stage("Terraform Apply") {
       steps{
         sh '''
-          docker run \
+          docker run -w /data \
           -e "ARM_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
           -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
           -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
