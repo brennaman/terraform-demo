@@ -6,5 +6,3 @@ WORKDIR /app
 
 # Put all your configration files in the same folder as the Dockerfile
 COPY . /app
-
-RUN ["terraform", "init"]
