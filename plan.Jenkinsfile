@@ -4,8 +4,6 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
     dockerLatest = ''
-    terraformRegistry = "hashicorp/terraform:light"
-    TERRAFORM_CMD = 'docker run -w /data -v $(pwd):/data'
     TF_VAR_PUBLIC_SSH_KEY = credentials('PUBLIC_SSH_KEY')
     TF_VAR_AZURE_CLIENT_ID = credentials('AZURE_CLIENT_ID')
     TF_VAR_AZURE_CLIENT_SECRET = credentials('AZURE_CLIENT_SECRET')
