@@ -12,14 +12,29 @@ pipeline {
         sh "docker pull $DOCKER_TRIGGER_REPO_NAME"
       }
     }
-    stage("Terraform Apply") {
+    stage("Terraform Plan") {
       steps{
-        sh "${TERRAFORM_CMD} -e \"TF_VAR_PUBLIC_SSH_KEY=${env.PUBLIC_SSH_KEY}\" -e \"TF_VAR_AZURE_AKS_ADMIN_USER=${env.AZURE_AKS_ADMIN_USER}\" -e \"TF_VAR_AZURE_AKS_AAD_SERVER_SECRET=${env.AZURE_AKS_AAD_SERVER_SECRET}\" -e \"TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID=${env.AZURE_AKS_AAD_SERVER_APP_ID}\" -e \"TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID=${env.AZURE_AKS_AAD_CLIENT_APP_ID}\" -e \"TF_VAR_AZURE_SUBSCRIPTION_ID=${env.AZURE_SUBSCRIPTION_ID}\" -e \"TF_VAR_AZURE_TENANT_ID=${env.AZURE_TENANT_ID}\" -e \"TF_VAR_AZURE_CLIENT_ID=${env.AZURE_CLIENT_ID}\" -e \"TF_VAR_AZURE_CLIENT_SECRET=${env.AZURE_CLIENT_SECRET}\" $DOCKER_TRIGGER_REPO_NAME apply -auto-approve"
+        sh '''
+          docker run -w /data -v \$(pwd):/data \
+          -e "TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY" \
+          -e "TF_VAR_AZURE_AKS_ADMIN_USER=$TF_VAR_AZURE_AKS_ADMIN_USER" \
+          -e "TF_VAR_AZURE_AKS_AAD_SERVER_SECRET=$TF_VAR_AZURE_AKS_AAD_SERVER_SECRET" \
+          -e "TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID=$TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID" \
+          -e "TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID=$TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID" \
+          -e "TF_VAR_AZURE_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
+          -e "TF_VAR_AZURE_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
+          -e "TF_VAR_AZURE_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
+          -e "TF_VAR_AZURE_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
+          -e "ARM_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
+          -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
+          -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
+          -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
+          brennaman3/terraform-azurecli:light apply -auto-approve
+          '''
       }
     }
     stage('Cleanup') {
       steps{
-        sh "docker rmi $registry:latest"
         sh "rm -rf *"
       }
     }

@@ -94,10 +94,10 @@ pipeline {
         }
       }
     }
-    stage('Cleanup') {
-      steps{
-        sh "rm -rf *"
-      }
-    }
+    // stage('Cleanup') {
+    //   steps{
+    //     sh "rm -rf *"
+    //   }
+    // }
   }
 }
