@@ -47,7 +47,7 @@ pipeline {
         //   -backend-config="container_name=$TERRAFORM_BACKEND_CONTAINER_NAME" \
         //   -backend-config="key=$TERRAFORM_BACKEND_KEY"
         //   '''
-        withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: backend_config)]) {
+        withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: 'AZURERM_BACKEND_CONFIG')]) {
           sh "echo 1"
           // sh '''
           //   docker run -w /data -v \$(pwd):/data \
