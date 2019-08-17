@@ -21,31 +21,31 @@ pipeline {
         sh "docker pull $DOCKER_TRIGGER_REPO_NAME"
       }
     }
-    stage("Terraform Init") {
-      steps{
-        sh '''
-          docker run -w /app \
-          -e "TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY" \
-          -e "TF_VAR_AZURE_AKS_ADMIN_USER=$TF_VAR_AZURE_AKS_ADMIN_USER" \
-          -e "TF_VAR_AZURE_AKS_AAD_SERVER_SECRET=$TF_VAR_AZURE_AKS_AAD_SERVER_SECRET" \
-          -e "TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID=$TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID" \
-          -e "TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID=$TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID" \
-          -e "TF_VAR_AZURE_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
-          -e "TF_VAR_AZURE_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
-          -e "TF_VAR_AZURE_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
-          -e "TF_VAR_AZURE_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-          -e "ARM_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
-          -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
-          -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
-          -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-          $DOCKER_TRIGGER_REPO_NAME init \
-          -backend-config="resource_group_name=$TERRAFORM_BACKEND_RESOURCE_GRP_NAME" \
-          -backend-config="storage_account_name=$TERRAFORM_BACKEND_STORAGE_ACCT_NAME" \
-          -backend-config="container_name=$TERRAFORM_BACKEND_CONTAINER_NAME" \
-          -backend-config="key=$TERRAFORM_BACKEND_KEY"
-          '''
-      }
-    }
+    // stage("Terraform Init") {
+    //   steps{
+    //     sh '''
+    //       docker run -w /app \
+    //       -e "TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY" \
+    //       -e "TF_VAR_AZURE_AKS_ADMIN_USER=$TF_VAR_AZURE_AKS_ADMIN_USER" \
+    //       -e "TF_VAR_AZURE_AKS_AAD_SERVER_SECRET=$TF_VAR_AZURE_AKS_AAD_SERVER_SECRET" \
+    //       -e "TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID=$TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID" \
+    //       -e "TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID=$TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID" \
+    //       -e "TF_VAR_AZURE_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
+    //       -e "TF_VAR_AZURE_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
+    //       -e "TF_VAR_AZURE_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
+    //       -e "TF_VAR_AZURE_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
+    //       -e "ARM_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
+    //       -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
+    //       -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
+    //       -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
+    //       $DOCKER_TRIGGER_REPO_NAME init \
+    //       -backend-config="resource_group_name=$TERRAFORM_BACKEND_RESOURCE_GRP_NAME" \
+    //       -backend-config="storage_account_name=$TERRAFORM_BACKEND_STORAGE_ACCT_NAME" \
+    //       -backend-config="container_name=$TERRAFORM_BACKEND_CONTAINER_NAME" \
+    //       -backend-config="key=$TERRAFORM_BACKEND_KEY"
+    //       '''
+    //   }
+    // }
     stage("Terraform Apply") {
       steps{
         sh '''
