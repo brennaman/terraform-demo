@@ -46,7 +46,7 @@ pipeline {
           '''
       }
     }
-    stage("Terraform Plan") {
+    stage("Terraform Apply") {
       steps{
         sh '''
           docker run -w /data -v \$(pwd):/data \
