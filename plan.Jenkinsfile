@@ -63,6 +63,10 @@ pipeline {
           -e TF_VAR_AZURE_TENANT_ID=$TF_VAR_AZURE_TENANT_ID \
           -e TF_VAR_AZURE_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID \
           -e TF_VAR_AZURE_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET \
+          -e ARM_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID \
+          -e ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID \
+          -e ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID \
+          -e ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET \
           brennaman3/terraform-azurecli:light init \
           -backend-config="resource_group_name=$TERRAFORM_BACKEND_RESOURCE_GRP_NAME" \
           -backend-config="storage_account_name=$TERRAFORM_BACKEND_STORAGE_ACCT_NAME" \
