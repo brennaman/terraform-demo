@@ -10,3 +10,5 @@ terraform.tfvars
 **/*.csr
 **/*.key
 **/*.pfx
+
+azurerm-backend.config
