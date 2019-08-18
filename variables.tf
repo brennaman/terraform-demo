@@ -34,7 +34,7 @@ variable "region" {
 
 variable "prefix" {
   description = "This prefix will be included in the name of some resources."
-  default     = "mbdemo8"
+  default     = "mbdemo9"
 }
 
 variable "location" {
