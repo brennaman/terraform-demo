@@ -48,7 +48,7 @@ pipeline {
         //   -backend-config="key=$TERRAFORM_BACKEND_KEY"
         //   '''
         withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: 'AZURERM_BACKEND_CONFIG')]) {
-          sh "echo 1"
+          sh "echo $AZURERM_BACKEND_CONFIG"
           // sh '''
           //   docker run -w /data -v \$(pwd):/data \
           //   -e "TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY" \
