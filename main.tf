@@ -5,6 +5,11 @@ provider "azurerm" {
   client_secret                 = "${var.AZURE_CLIENT_SECRET}"
 }
 
+terraform{
+  source = [
+    "./common/backend.tf"
+  ]
+}
 
 resource "azurerm_resource_group" "k8s" {
   name     = "${var.prefix}-aks-${var.region}-${var.environment}-${var.location_key}-group"
