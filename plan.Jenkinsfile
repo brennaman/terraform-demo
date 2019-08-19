@@ -23,8 +23,9 @@ pipeline {
     }
     stage("Terraform Init") {
       steps{
-        sh "terraform workspace new base setup"
-        sh "terraform workspace select base setup"
+        sh "docker run -w /data -v \$(pwd):/data brennaman3/terraform-azurecli:light workspace new base setup"
+        sh "docker run -w /data -v \$(pwd):/data brennaman3/terraform-azurecli:light workspace select base setup"
+        
         withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: 'AZURERM_BACKEND_CONFIG')]) {
           sh "cp $AZURERM_BACKEND_CONFIG backend.config"
           sh '''
