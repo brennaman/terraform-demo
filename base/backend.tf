@@ -1,1 +1,3 @@
-../common/backend.tf
+terraform {
+  backend "azurerm" {}
+}

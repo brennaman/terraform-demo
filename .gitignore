@@ -3,7 +3,7 @@
 terraform.tfstate
 terraform.tfstate.backup
 terraform/crash.log
-terraform.tfvars
+*.tfvars
 
 #certs
 **/*.crt
