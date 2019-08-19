@@ -41,7 +41,7 @@ pipeline {
             -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
             -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
             brennaman3/terraform-azurecli:light init \
-            -backend-config="./common/azurerm-backend.config"
+            -backend-config="backend.tfvars"
             '''
         }
       }
