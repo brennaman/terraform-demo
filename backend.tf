@@ -1,1 +1,1 @@
-./common/backend.tf
+common/backend.tf
