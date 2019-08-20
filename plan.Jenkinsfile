@@ -16,12 +16,6 @@ pipeline {
   }
   agent any
   stages {
-    stage("Checkout SCM") {
-      steps{
-        deleteDir()
-        checkout scm
-      }
-    }
     stage("Docker Pull") {
       steps{
         sh "docker pull brennaman3/terraform-azurecli:light"
@@ -103,4 +97,9 @@ pipeline {
     //   }
     // }
   }
+  post { 
+        always { 
+            cleanWs()
+        }
+    }
 }
