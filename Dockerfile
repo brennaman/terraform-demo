@@ -7,4 +7,4 @@ WORKDIR /app
 # Put all your configration files in the same folder as the Dockerfile
 COPY . /app
 
-RUN ["cp", "/app/*", "/data/*"]
+RUN ["cp", "-a" "/app/.", "/data/"]
