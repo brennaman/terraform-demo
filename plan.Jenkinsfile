@@ -77,7 +77,7 @@ pipeline {
             -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
             -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
             -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-            brennaman3/terraform-azurecli:light init \
+            brennaman3/terraform-azurecli:light init -force-copy \
             -backend-config=backend.tfvars base
             '''
         }
