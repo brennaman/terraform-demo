@@ -13,5 +13,3 @@ modules/backend/*
 **/*.csr
 **/*.key
 **/*.pfx
-
-azurerm-backend.config
