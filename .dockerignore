@@ -1,1 +1,6 @@
 **/.terraform
+**/terraform.tfstate.d
+**/backend.tfvars
+**/*.tfstate
+.git
+**/*.Jenkinsfile
