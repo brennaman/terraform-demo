@@ -18,8 +18,8 @@ pipeline {
   stages {
     stage("Checkout SCM") {
       steps{
-        sh "deleteDir()"
-        sh "checkout scm"
+        deleteDir()
+        checkout scm
       }
     }
     stage("Docker Pull") {
