@@ -18,33 +18,17 @@ variable "kubernetes_version" {}
 
 variable "vnet_subnet_id" {}
 
-variable "resource_group" {}
+variable "prefix" {}
 
-variable "prefix" {
-    default = "mbdemo"
-}
+variable "environment" {}
 
-variable "environment" {
-  default = "dev"
-}
+variable "region" {}
 
-variable "region" {
-  default = "atfan"
-}
+variable "location_key" {}
 
-variable "location_key" {
-  default = "eus"
-}
+variable "location" {}
 
-variable "location" {
-  default = "eastus"
-}
+variable "vm_size" {}
 
-variable "vm_size" {
-  default = "Standard_DS2_v2"
-}
-
-variable "vm_count" {
-  default = "3"
-}
+variable "vm_count" {}
 

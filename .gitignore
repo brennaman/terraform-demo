@@ -5,6 +5,7 @@ terraform.tfstate.backup
 terraform/crash.log
 terraform.tfstate.d/
 *.tfvars
+modules/backend/*
 
 
 #certs

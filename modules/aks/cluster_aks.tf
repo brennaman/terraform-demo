@@ -1,9 +1,12 @@
-
+resource "azurerm_resource_group" "k8s" {
+  name     = "${var.prefix}-aks-${var.region}-${var.environment}-${var.location_key}-group"
+  location = "${var.location}"
+}
 resource "azurerm_kubernetes_cluster" "k8s" {
   name                = "${var.prefix}-aks-${var.region}-${var.environment}-${var.location_key}"
   location            = "${var.location}"
   dns_prefix          = "${var.prefix}-aks-${var.region}-${var.environment}-${var.location_key}"
-  resource_group_name = "${var.resource_group}"
+  resource_group_name = "${azurerm_resource_group.k8s.name}"
   kubernetes_version  = "${var.kubernetes_version}"
 
   linux_profile {
