@@ -47,7 +47,7 @@ pipeline {
             -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
             -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
             -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-            $DOCKER_TRIGGER_REPO_NAME $DOCKER_TRIGGER_REPO_NAME init -backend-config=~/data/backend.tfvars base && apply -auto-approve base
+            $DOCKER_TRIGGER_REPO_NAME $DOCKER_TRIGGER_REPO_NAME init -backend-config=/data/backend.tfvars base && apply -auto-approve base
             '''
         }
       }
