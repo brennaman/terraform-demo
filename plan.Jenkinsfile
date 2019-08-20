@@ -15,10 +15,17 @@ pipeline {
     TF_VAR_AZURE_TENANT_ID = credentials('AZURE_TENANT_ID')
   }
   agent any
+  options { skipDefaultCheckout() }
   stages {
     stage("Docker Pull") {
       steps{
         sh "docker pull brennaman3/terraform-azurecli:light"
+      }
+    }
+    stage("Checkout SCM") {
+      steps{
+        cleanWs()
+        checkout scm
       }
     }
     stage("Terraform Init") {
@@ -70,26 +77,26 @@ pipeline {
           '''
       }
     }
-    // stage("Docker Build") {
-    //   steps{
-    //     script {
-    //       dockerImage = docker.build registry + ":$BUILD_NUMBER"
-    //       dockerLatest = docker.build registry + ":latest"
+    stage("Docker Build") {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerLatest = docker.build registry + ":latest"
           
-    //     }
-    //   }
-    // }
-    // stage("Docker Push") {
-    //   steps{
-    //     script {
-    //         docker.withRegistry( '', registryCredential ) {
-    //             dockerImage.push()
-    //             dockerLatest.push()
-    //         }
+        }
+      }
+    }
+    stage("Docker Push") {
+      steps{
+        script {
+            docker.withRegistry( '', registryCredential ) {
+                dockerImage.push()
+                dockerLatest.push()
+            }
 
-    //     }
-    //   }
-    // }
+        }
+      }
+    }
     // stage('Cleanup') {
     //   steps{
     //     sh "rm -rf *"
