@@ -21,34 +21,34 @@ pipeline {
         sh "docker pull brennaman3/terraform-azurecli:light"
       }
     }
-    stage("Terraform Init") {
-      steps{
-        sh "docker run -w /data -v \$(pwd):/data brennaman3/terraform-azurecli:light workspace new base setup"
-        sh "docker run -w /data -v \$(pwd):/data brennaman3/terraform-azurecli:light workspace select base setup"
+    // stage("Terraform Init") {
+    //   steps{
+    //     sh "docker run -w /data -v \$(pwd):/data brennaman3/terraform-azurecli:light workspace new base setup"
+    //     sh "docker run -w /data -v \$(pwd):/data brennaman3/terraform-azurecli:light workspace select base setup"
         
-        withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: 'AZURERM_BACKEND_CONFIG')]) {
-          sh "cp $AZURERM_BACKEND_CONFIG backend.config"
-          sh '''
-            docker run -w /data -v \$(pwd):/data \
-            -e "TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY" \
-            -e "TF_VAR_AZURE_AKS_ADMIN_USER=$TF_VAR_AZURE_AKS_ADMIN_USER" \
-            -e "TF_VAR_AZURE_AKS_AAD_SERVER_SECRET=$TF_VAR_AZURE_AKS_AAD_SERVER_SECRET" \
-            -e "TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID=$TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID" \
-            -e "TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID=$TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID" \
-            -e "TF_VAR_AZURE_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
-            -e "TF_VAR_AZURE_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
-            -e "TF_VAR_AZURE_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
-            -e "TF_VAR_AZURE_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-            -e "ARM_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
-            -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
-            -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
-            -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-            brennaman3/terraform-azurecli:light init \
-            -backend-config="backend.config" setup
-            '''
-        }
-      }
-    }
+    //     withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: 'AZURERM_BACKEND_CONFIG')]) {
+    //       sh "cp $AZURERM_BACKEND_CONFIG backend.tfvars"
+    //       sh '''
+    //         docker run -w /data -v \$(pwd):/data \
+    //         -e "TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY" \
+    //         -e "TF_VAR_AZURE_AKS_ADMIN_USER=$TF_VAR_AZURE_AKS_ADMIN_USER" \
+    //         -e "TF_VAR_AZURE_AKS_AAD_SERVER_SECRET=$TF_VAR_AZURE_AKS_AAD_SERVER_SECRET" \
+    //         -e "TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID=$TF_VAR_AZURE_AKS_AAD_SERVER_APP_ID" \
+    //         -e "TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID=$TF_VAR_AZURE_AKS_AAD_CLIENT_APP_ID" \
+    //         -e "TF_VAR_AZURE_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
+    //         -e "TF_VAR_AZURE_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
+    //         -e "TF_VAR_AZURE_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
+    //         -e "TF_VAR_AZURE_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
+    //         -e "ARM_SUBSCRIPTION_ID=$TF_VAR_AZURE_SUBSCRIPTION_ID" \
+    //         -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
+    //         -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
+    //         -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
+    //         brennaman3/terraform-azurecli:light init \
+    //         -backend-config="backend.config" base
+    //         '''
+    //     }
+    //   }
+    // }
     // stage("Terraform Plan") {
     //   steps{
     //     sh '''
