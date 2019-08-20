@@ -63,7 +63,7 @@ pipeline {
             brennaman3/terraform-azurecli:light apply -auto-approve setup
             '''
             sh '''
-            docker run -w /data -v \$(pwd):/data \
+            echo "yes" | docker run -w /data -v \$(pwd):/data \
             -e "TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY" \
             -e "TF_VAR_AZURE_AKS_ADMIN_USER=$TF_VAR_AZURE_AKS_ADMIN_USER" \
             -e "TF_VAR_AZURE_AKS_AAD_SERVER_SECRET=$TF_VAR_AZURE_AKS_AAD_SERVER_SECRET" \
@@ -77,7 +77,7 @@ pipeline {
             -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
             -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
             -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-            brennaman3/terraform-azurecli:light init -force-copy \
+            brennaman3/terraform-azurecli:light init \
             -backend-config=backend.tfvars base
             '''
         }
