@@ -1,9 +1,5 @@
 pipeline {
   environment {
-    registry = "brennaman3/terraform-rollout-plan"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-    dockerLatest = ''
     TF_VAR_PUBLIC_SSH_KEY = credentials('PUBLIC_SSH_KEY')
     TF_VAR_AZURE_CLIENT_ID = credentials('AZURE_CLIENT_ID')
     TF_VAR_AZURE_CLIENT_SECRET = credentials('AZURE_CLIENT_SECRET')
@@ -28,7 +24,7 @@ pipeline {
         checkout scm
       }
     }
-    stage("Terraform Plan")
+    stage("Remote Backend Setup")
     {
       steps{
         withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: 'AZURERM_BACKEND_CONFIG')]) {
@@ -48,32 +44,10 @@ pipeline {
             -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
             -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
             -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-            brennaman3/terraform-azurecli:full bash plan.sh
+            brennaman3/terraform-azurecli:full bash setup.sh
             '''
         }
       }
     }
-    stage("Docker Build") {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-          dockerLatest = docker.build registry + ":latest"
-          
-        }
-      }
-    }
-    stage("Docker Push") {
-      steps{
-        script {
-            docker.withRegistry( '', registryCredential ) {
-                dockerImage.push()
-                dockerLatest.push()
-            }
-
-        }
-      }
-    }
-    
   }
-  
 }
