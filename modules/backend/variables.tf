@@ -4,13 +4,13 @@ variable "location" {}
 
 #backend config specific to azure
 variable "resource_group_name" {
-  default="mb1982102-terraform-state-group"
+  default="mb1982103-terraform-state-group"
 }
 variable "storage_account_name" {
-  default="mb1982102tfstatesa"
+  default="mb1982103tfstatesa"
 }
 variable "container_name" {
-  default="mb1982102-tfstate"
+  default="mb1982103-tfstate"
 }
 variable "key" {
   default="terraform.state"
