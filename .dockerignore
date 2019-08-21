@@ -4,3 +4,4 @@
 **/*.tfstate
 .git
 **/*.Jenkinsfile
+tfplan

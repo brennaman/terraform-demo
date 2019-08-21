@@ -10,4 +10,4 @@ terraform workspace select base setup
 
 terraform init -backend-config=backend.tfvars base
 
-terraform plan -out=tfplan -input=false base
+terraform plan -input=false base
