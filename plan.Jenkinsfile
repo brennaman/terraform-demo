@@ -102,32 +102,27 @@ pipeline {
     //       '''
     //   }
     // }
-    stage("Docker Build") {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-          dockerLatest = docker.build registry + ":latest"
-          
-        }
-      }
-    }
-    stage("Docker Push") {
-      steps{
-        script {
-            docker.withRegistry( '', registryCredential ) {
-                dockerImage.push()
-                dockerLatest.push()
-            }
-
-        }
-      }
-    }
-    // stage('Cleanup') {
+    // stage("Docker Build") {
     //   steps{
-    //     sh "rm -rf *"
-    //     sh "rm -rf .*"
+    //     script {
+    //       dockerImage = docker.build registry + ":$BUILD_NUMBER"
+    //       dockerLatest = docker.build registry + ":latest"
+          
+    //     }
     //   }
     // }
+    // stage("Docker Push") {
+    //   steps{
+    //     script {
+    //         docker.withRegistry( '', registryCredential ) {
+    //             dockerImage.push()
+    //             dockerLatest.push()
+    //         }
+
+    //     }
+    //   }
+    // }
+    
   }
   
 }
