@@ -10,4 +10,4 @@ terraform workspace select base setup
 
 terraform init -backend-config=/data/backend.tfvars base
 
-terraform apply -input=false base
+terraform apply -input=false -auto-approve base
