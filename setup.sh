@@ -10,7 +10,7 @@ terraform workspace select base setup
 
 # create base infra
 terraform init setup
-terraform apply -var-file=backend.tfvars -auto-approve setup
+terraform apply -auto-approve -var-file=backend.tfvars setup
 
 # migrate local state to the remote [s3, consul, azure storage account, etc.]
-terraform init -backend-config=backend.tfvars base
+echo "yes" | terraform init -backend-config=backend.tfvars base
