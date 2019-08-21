@@ -57,7 +57,6 @@ pipeline {
     {
       steps{
         withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: 'AZURERM_BACKEND_CONFIG')]) {
-          sh "cp $AZURERM_BACKEND_CONFIG backend.tfvars"
           sh '''
             docker run --rm -w /app -v \$(pwd):/app \
             -e "TF_VAR_PUBLIC_SSH_KEY=$TF_VAR_PUBLIC_SSH_KEY" \
