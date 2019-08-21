@@ -5,6 +5,7 @@
 terraform/crash.log
 terraform.tfstate.d/
 *.tfvars
+tfplan
 
 
 #certs
