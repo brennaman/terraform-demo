@@ -28,7 +28,7 @@ pipeline {
         checkout scm
       }
     }
-    stage(Infrastructure Setup)
+    stage("Infrastructure Setup")
     {
       steps{
         withCredentials([file(credentialsId: 'AZURERM_BACKEND_CONFIG', variable: 'AZURERM_BACKEND_CONFIG')]) {
