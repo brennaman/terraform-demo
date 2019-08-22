@@ -1,7 +1,8 @@
 provider "kubernetes" {
+    config_path   ="/root/.kube/config"
 }
 
-resource "null_resource" "cluster1" {
+resource "null_resource" "cluster2" {
 
     provisioner "local-exec" {
     command = <<EOT
@@ -10,9 +11,6 @@ resource "null_resource" "cluster1" {
     kubectl get nodes
     EOT
   }
-
-  depends_on = [azurerm_kubernetes_cluster.k8s]
-
 }
 
 # Command line equivalent:
@@ -39,7 +37,7 @@ resource "kubernetes_cluster_role_binding" "kubernetes-dashboard-rule" {
     api_group = ""
   }
 
-  depends_on = [null_resource.cluster1]
+  depends_on = [null_resource.cluster2]
 
 }
 
@@ -55,7 +53,7 @@ resource "kubernetes_service_account" "tiller" {
     namespace = "kube-system"
   }
 
-  depends_on = [null_resource.cluster1]
+  depends_on = [null_resource.cluster2]
 
 }
 
@@ -81,6 +79,6 @@ resource "kubernetes_cluster_role_binding" "tiller-cluster-rule" {
     command = "helm init --service-account tiller"
   }
 
-  depends_on = [null_resource.cluster1]
+  depends_on = [null_resource.cluster2]
 
 }
