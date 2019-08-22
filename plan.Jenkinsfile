@@ -19,7 +19,7 @@ pipeline {
   stages {
     stage("Docker Pull") {
       steps{
-        sh "docker pull brennaman3/terraform-azurecli:full"
+        sh "docker pull brennaman3/aksdeploy:latest"
       }
     }
     stage("Checkout SCM") {

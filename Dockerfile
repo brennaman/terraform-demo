@@ -1,5 +1,5 @@
 # Use the light version of the image that contains just the latest binary
-FROM brennaman3/terraform-azurecli:full
+FROM brennaman3/aksdeploy:latest
 
 # The app folder will contain all our files
 WORKDIR /app
