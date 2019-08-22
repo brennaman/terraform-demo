@@ -1,6 +1,19 @@
 provider "kubernetes" {
 }
 
+resource "null_resource" "cluster" {
+
+    provisioner "local-exec" {
+    command = <<EOT
+    az login --service-principal --username ${var.AZURE_CLIENT_ID} --password ${var.AZURE_CLIENT_SECRET} --tenant ${var.AZURE_TENANT_ID}
+    az aks get-credentials --resource-group ${azurerm_resource_group.k8s.name} --name ${azurerm_kubernetes_cluster.k8s.name} --admin
+    EOT
+  }
+
+  depends_on = [azurerm_kubernetes_cluster.k8s]
+
+}
+
 # Command line equivalent:
 #
 # kubectl create clusterrolebinding kubernetes-dashboard \
@@ -25,7 +38,7 @@ resource "kubernetes_cluster_role_binding" "kubernetes-dashboard-rule" {
     api_group = ""
   }
 
-  depends_on = [azurerm_kubernetes_cluster.k8s]
+  depends_on = [null_resource.cluster]
 
 }
 
@@ -41,7 +54,7 @@ resource "kubernetes_service_account" "tiller" {
     namespace = "kube-system"
   }
 
-  depends_on = [azurerm_kubernetes_cluster.k8s]
+  depends_on = [null_resource.cluster]
 
 }
 
@@ -64,12 +77,9 @@ resource "kubernetes_cluster_role_binding" "tiller-cluster-rule" {
   }
 
   provisioner "local-exec" {
-    command = <<EOT
-    az aks get-credentials --resource-group ${azurerm_resource_group.k8s.name} --name ${azurerm_kubernetes_cluster.k8s.name} --admin
-    helm init --service-account tiller
-    EOT
+    command = "helm init --service-account tiller"
   }
 
-  depends_on = [azurerm_kubernetes_cluster.k8s]
+  depends_on = [null_resource.cluster]
 
 }

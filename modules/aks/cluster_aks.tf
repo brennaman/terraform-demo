@@ -46,5 +46,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
             tenant_id         = "${var.AZURE_TENANT_ID}"
         }
   }
+
+  
+
 }
   
