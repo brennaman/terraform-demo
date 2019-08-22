@@ -7,6 +7,7 @@ resource "null_resource" "cluster" {
     command = <<EOT
     az login --service-principal --username ${var.AZURE_CLIENT_ID} --password ${var.AZURE_CLIENT_SECRET} --tenant ${var.AZURE_TENANT_ID}
     az aks get-credentials --resource-group ${azurerm_resource_group.k8s.name} --name ${azurerm_kubernetes_cluster.k8s.name} --admin
+    kubectl get nodes
     EOT
   }
 
