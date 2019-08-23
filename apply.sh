@@ -5,6 +5,9 @@
 # cluster infrastructure
 #
 # Base Workspace
+echo "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+whoami
+echo "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
 terraform workspace new base setup
 terraform workspace select base setup
 
