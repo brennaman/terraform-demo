@@ -5,9 +5,9 @@
 # cluster infrastructure
 #
 # Base Workspace
-terraform workspace new base setup
-terraform workspace select base setup
+sudo terraform workspace new base setup
+sudo terraform workspace select base setup
 
-terraform init -backend-config=/data/backend.tfvars base
+sudo terraform init -backend-config=/data/backend.tfvars base
 
-terraform apply -input=false -auto-approve base
+sudo terraform apply -input=false -auto-approve base

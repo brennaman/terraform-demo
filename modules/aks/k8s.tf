@@ -1,5 +1,4 @@
 provider "kubernetes" {
-    host="https://mb19821-aks-atfan-dev-eus-dc9efb2d.hcp.eastus.azmk8s.io:443"
 }
 
 resource "null_resource" "cluster6" {
