@@ -1,5 +1,5 @@
 provider "kubernetes" {
-    config_file = "/root/.kube/config"
+    config_path = "/root/.kube/config"
     config_context = "mb19821-aks-atfan-dev-eus-admin"
 }
 
