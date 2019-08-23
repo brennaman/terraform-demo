@@ -1,4 +1,8 @@
 provider "kubernetes" {
+    host = "https://mb19821-aks-atfan-dev-eus-dc9efb2d.hcp.eastus.azmk8s.io:443"
+
+    username = "${var.AZURE_CLIENT_ID}"
+    password = "${var.AZURE_CLIENT_SECRET}"
 }
 
 resource "null_resource" "cluster6" {
