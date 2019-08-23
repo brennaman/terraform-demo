@@ -15,7 +15,7 @@ pipeline {
   stages {
     stage("Docker Pull") {
       steps{
-        sh "docker pull brennaman3/terraform-azurecli:full"
+        sh "docker pull brennaman3/aksdeploy:latest"
       }
     }
     stage("Checkout SCM") {
@@ -44,7 +44,7 @@ pipeline {
             -e "ARM_TENANT_ID=$TF_VAR_AZURE_TENANT_ID" \
             -e "ARM_CLIENT_ID=$TF_VAR_AZURE_CLIENT_ID" \
             -e "ARM_CLIENT_SECRET=$TF_VAR_AZURE_CLIENT_SECRET" \
-            brennaman3/terraform-azurecli:full bash setup.sh
+            brennaman3/aksdeploy:latest bash setup.sh
             '''
         }
       }
