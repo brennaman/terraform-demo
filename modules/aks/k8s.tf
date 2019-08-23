@@ -1,8 +1,4 @@
 provider "kubernetes" {
-    host = "https://mb19821-aks-atfan-dev-eus-dc9efb2d.hcp.eastus.azmk8s.io:443"
-
-    username = "${var.AZURE_CLIENT_ID}"
-    password = "${var.AZURE_CLIENT_SECRET}"
 }
 
 resource "null_resource" "cluster6" {
@@ -12,6 +8,7 @@ resource "null_resource" "cluster6" {
     az login --service-principal --username ${var.AZURE_CLIENT_ID} --password ${var.AZURE_CLIENT_SECRET} --tenant ${var.AZURE_TENANT_ID}
     az aks get-credentials --resource-group ${azurerm_resource_group.k8s.name} --name ${azurerm_kubernetes_cluster.k8s.name} --admin
     kubectl get nodes
+    whoami
     ls -a
     cat ~/.kube/config
     EOT
