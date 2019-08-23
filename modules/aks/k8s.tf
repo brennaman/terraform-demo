@@ -1,7 +1,9 @@
 provider "kubernetes" {
+    config_file = "/root/.kube/config"
+    config_context = "mb19821-aks-atfan-dev-eus-admin"
 }
 
-resource "null_resource" "cluster7" {
+resource "null_resource" "cluster8" {
 
     provisioner "local-exec" {
     command = <<EOT
@@ -39,7 +41,7 @@ resource "kubernetes_cluster_role_binding" "kubernetes-dashboard-rule" {
     api_group = ""
   }
 
-  depends_on = [null_resource.cluster7]
+  depends_on = [null_resource.cluster8]
 
 }
 
@@ -55,7 +57,7 @@ resource "kubernetes_service_account" "tiller" {
     namespace = "kube-system"
   }
 
-  depends_on = [null_resource.cluster7]
+  depends_on = [null_resource.cluster8]
 
 }
 
@@ -81,6 +83,6 @@ resource "kubernetes_cluster_role_binding" "tiller-cluster-rule" {
     command = "helm init --service-account tiller"
   }
 
-  depends_on = [null_resource.cluster7]
+  depends_on = [null_resource.cluster8]
 
 }
