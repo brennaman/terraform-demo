@@ -1,11 +1,11 @@
 #terraform
-.terraform/
-*.tfstate
-*.tfstate.backup
-terraform/crash.log
-terraform.tfstate.d/
-*.tfvars
-tfplan
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.backup
+**/terraform/crash.log
+**/terraform.tfstate.d/
+**/*.tfvars
+**/tfplan
 
 
 #certs
