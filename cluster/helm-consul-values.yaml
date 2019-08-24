@@ -1,0 +1,22 @@
+global:
+  datacenter: hashidc1
+
+ui:
+  service:
+    type: "NodePort"
+
+connectInject:
+  enabled: true
+
+client:
+  enabled: true
+  grpc: true
+
+server:
+  replicas: 2
+  bootstrapExpect: 2
+  disruptionBudget:
+    enabled: true
+    maxUnavailable: 0
+  storage: 5Gi
+  storageClass: managed-premium
